@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    AUTH
+  {% else %}
+    <form method="post">{% csrf_token %}
+      {{ registration_form }}
+      <button type="submit">Create Account</button>
+    </form>
+  {% endif %}
+{% endblock %}

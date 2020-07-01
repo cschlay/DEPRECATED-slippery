@@ -2,11 +2,19 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    AUTH
+    <h1>Projects</h1>
+    <a href="{% url 'projects:new-project' %}"><button class="ui primary button">New Project</button></a>
   {% else %}
     <form method="post">{% csrf_token %}
       {{ registration_form }}
       <button type="submit">Create Account</button>
     </form>
   {% endif %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+
 {% endblock %}

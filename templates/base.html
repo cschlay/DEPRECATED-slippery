@@ -10,6 +10,12 @@
 </head>
 
 <body>
+{% if user.is_authenticated %}
+  <nav>
+    <a href=""></a>
+    <a href="{% url 'logout' %}">Logout</a>
+  </nav>
+{% endif %}
 {% block content %}{% endblock %}
 </body>
 

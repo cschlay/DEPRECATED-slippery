@@ -2,8 +2,42 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <h1>Projects</h1>
-    <a href="{% url 'projects:new-project' %}"><button class="ui primary button">New Project</button></a>
+    <h2>System Status</h2>
+    <div class="ui teal progress" id="ramBar">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
+      <div class="label"></div>
+    </div>
+    <div class="ui teal progress" id="cpuBar">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
+      <div class="label">CPU</div>
+    </div>
+    <div class="ui teal progress" id="diskBar">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
+      <div class="label"></div>
+    </div>
+    <h2>Projects</h2>
+    <a href="{% url 'projects:new-project' %}">
+      <button class="ui primary button">New Project</button>
+    </a>
+    <div style="margin-top: 2rem;"></div>
+    <div class="ui cards">
+      {% for project in projects %}
+        <div class="card">
+          <div class="content">
+            <a class="header" href="{% url 'projects:project-detail' pk=project.pk %}">{{ project.title }}</a>
+           <div class="meta">Status: Deploying</div>
+          </div>
+          <div class="content">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
     <form method="post">{% csrf_token %}
       {{ registration_form }}
@@ -16,5 +50,27 @@
 {% endblock %}
 
 {% block js %}
-
+  <script>
+      const updateSystemInfo = () => {
+          fetch('/system').then(response => response.json()).then(({memory, cpu, disk}) => {
+              $('#ramBar').progress({
+                  percent: memory.percent,
+                  text: {
+                      active: `RAM: ${memory.used} MB / ${memory.total} MB`
+                  }
+              });
+              $('#cpuBar').progress({
+                  percent: cpu
+              });
+              $('#diskBar').progress({
+                  percent: disk.percent,
+                  text: {
+                      active: `DISK: ${disk.used} MB / ${disk.total} MB`
+                  }
+              });
+          })
+      }
+      updateSystemInfo()
+      setInterval(updateSystemInfo, 5000)
+  </script>
 {% endblock %}

@@ -8,7 +8,6 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   {% block css %}{% endblock %}
 </head>
 
@@ -16,7 +15,7 @@
 <div class="ui container">
   {% if user.is_authenticated %}
     <div class="ui menu">
-      <a href="" class="header item">Buttersys Slippery</a>
+      <a href="{% url 'home' %}" class="header item">Buttersys Slippery</a>
       <div class="right menu">
         <a href="{% url 'logout' %}" class="item">Logout</a>
       </div>
@@ -25,9 +24,9 @@
   {% block content %}{% endblock %}
 </div>
 
-<script>
-    {% block js %}{% endblock %}
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+{% block js %}{% endblock %}
 </body>
 
 </html>

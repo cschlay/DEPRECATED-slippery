@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ project.title }}</h1>
+  <small>Status: Deployed</small>
+  <a href="{{ project.git_repository }}">{{ project.git_repository }}</a>
+  <button class="ui teal button">Build</button>
+  <button class="ui teal basic button">Restart</button>
+  <button class="ui teal basic button">Edit</button>
+  <button class="ui red basic button">Shutdown</button>
+
+  <form action="{% url 'projects:project-delete' pk=project.pk %}" method="post">{% csrf_token %}
+    <button type="submit" class="ui red basic button">Delete</button>
+  </form>
+
+  <h2>Environment Variables</h2>
+  <button class="ui teal basic button">Add Variable</button>
+
+  <h2>Domains</h2>
+  <button class="ui teal basic button">Add domain</button>
+
+  <h2>Logs</h2>
+{% endblock %}

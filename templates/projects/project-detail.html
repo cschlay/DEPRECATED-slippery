@@ -20,4 +20,18 @@
   <button class="ui teal basic button">Add domain</button>
 
   <h2>Logs</h2>
+  <div class="ui feed">
+    {% for log in logs %}
+      <div class="event">
+        <div class="content">
+          <div class="date">
+            {{ log.logged_at }}
+          </div>
+          <p class="summary">
+            {{ log.text }}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

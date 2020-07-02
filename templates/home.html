@@ -34,6 +34,7 @@
            <div class="meta">Status: Deploying</div>
           </div>
           <div class="content">
+            <a href="https://{{ project.domain }}" target="_blank">{{ project.domain }}</a>
           </div>
         </div>
       {% endfor %}
@@ -71,6 +72,6 @@
           })
       }
       updateSystemInfo()
-      setInterval(updateSystemInfo, 5000)
+      setInterval(updateSystemInfo, 10000)
   </script>
 {% endblock %}

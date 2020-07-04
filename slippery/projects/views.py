@@ -1,5 +1,6 @@
+import os
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, DeleteView
 
@@ -19,8 +20,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
             level=ProjectLog.LEVEL_INFO,
             text='Project created.'
         )
-        # Deploy the project.
+        self.deploy_project(self.object)
         return response
+
+    def deploy_project(self, instance):
+        os.system(f'git clone {instance.git_repository} ~/projects')
 
 
 class ProjectDetailView(DetailView):

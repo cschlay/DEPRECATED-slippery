@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+from slippery.projects.models import Project
+
+
+class Webhook(models.Model):
+    uuid = models.UUIDField(primary_key=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)

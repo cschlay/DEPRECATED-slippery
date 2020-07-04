@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
 
-from slippery.core.forms import RegistrationForm
 from slippery.projects.models import Project
 
 
@@ -18,25 +17,13 @@ class HomeView(TemplateView):
                 'projects': Project.objects.all()
             }
         else:
-            return {
-                'registration_form': RegistrationForm()
-            }
+            return {}
 
     def get(self, request, *args, **kwargs):
         if User.objects.all().count() >= 1:
             if not request.user.is_authenticated:
                 return redirect('login')
         return render(request, self.template_name, context=self.get_context_data())
-
-    def post(self, request):
-        """Only creates an account if none exists and install token is correct."""
-        if User.objects.all().count() == 0:
-            form = RegistrationForm(request.POST)
-            if form.is_valid():
-                form.create(form.cleaned_data)
-                return redirect('login')
-            return render(request, self.template_name, context={'registration_form': form})
-        return redirect('login')
 
 
 class SystemUsage(View):

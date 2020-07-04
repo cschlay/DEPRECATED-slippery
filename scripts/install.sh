@@ -36,9 +36,11 @@ systemctl start slippery
 systemctl enable slippery
 systemctl status gunicorn
 
-cp scripts/nginx/slippery /etc/nginx/sites-available/slippery
+cp scripts/files/nginx-site-slippery /etc/nginx/sites-available/slippery
 ln -s /etc/nginx/sites-available/slippery /etc/nginx/sites-enabled
 systemctl restart nginx
+
+cp scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 
 apt install certbot python3-certbot-nginx
 certbot --nginx

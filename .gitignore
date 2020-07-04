@@ -5,4 +5,4 @@ venv/
 slippery.service
 *.sock
 
-nginx/
+scripts/files

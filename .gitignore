@@ -7,3 +7,4 @@ slippery.service
 
 scripts/files
 logs/
+!.keep

@@ -94,7 +94,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/logs/slippery.log',
+            'filename': 'logs/slippery.log',
         },
     },
     'loggers': {

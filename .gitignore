@@ -6,3 +6,4 @@ slippery.service
 *.sock
 
 scripts/files
+logs/

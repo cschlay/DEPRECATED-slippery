@@ -11,3 +11,10 @@ git clone https://github.com/cschlay/slippery.git
 cd slippery
 sudo ./scripts/install.sh
 ```
+
+## Updating
+
+```
+cd slippery
+sudo ./scripts/update.sh
+```

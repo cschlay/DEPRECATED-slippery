@@ -14,7 +14,24 @@ sudo ./scripts/install.sh
 
 ## Updating
 
-```
+```bash
 cd slippery
 sudo ./scripts/update.sh
+```
+
+## Users
+
+### Create a user
+```bash
+# Create user
+cd slippery
+source venv/bin/activate
+python3 manage.py createsuperuser
+```
+
+### Reset Lockout
+```bash
+cd slippery
+source venv/bin/activate
+python3 manage.py axes_reset
 ```

@@ -135,7 +135,7 @@ AUTHENTICATION_BACKENDS = [
     # Django ModelBackend is the default authentication backend.
     'django.contrib.auth.backends.ModelBackend',
 ]
-AXES_FAILURE_LIMIT = 10
+AXES_FAILURE_LIMIT = 3
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

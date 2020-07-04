@@ -1,4 +1,6 @@
 import getpass
+import os
+
 from django.core.management.utils import get_random_secret_key
 
 
@@ -18,7 +20,7 @@ def create_sudoers_config():
     with open('scripts/sudoers-template.txt', 'r') as readfile:
         content: str = readfile.read()
         config = {
-            'user': getpass.getuser()
+            'user': os.environ['SUDO_USER']
         }
         result: str = content.format(**config)
 
@@ -31,7 +33,7 @@ def create_nginx_config(server_name):
         content: str = readfile.read()
         config = {
             'server_name': server_name,
-            'user': getpass.getuser()
+            'user': os.environ['SUDO_USER']
         }
         result: str = content.format(**config).replace('\[','{').replace('\]', '}')
         with open(f'scripts/files/nginx-site-slippery', 'w') as writefile:
@@ -43,7 +45,7 @@ def create_systemd_service():
         content: str = readfile.read()
 
         config = {
-            'user': getpass.getuser()
+            'user': os.environ['SUDO_USER']
         }
         result: str = content.format(**config)
 

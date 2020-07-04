@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'slippery.core',
     'slippery.contrib.gitlab',
-    'slippery.projects'
+    'slippery.projects',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'slippery.urls'
@@ -126,6 +128,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+AXES_FAILURE_LIMIT = 10
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

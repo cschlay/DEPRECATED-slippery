@@ -3,35 +3,66 @@
 {% block content %}
   <h1>{{ project.title }}</h1>
   <small>Status: Deployed</small>
-  <a href="{{ project.git_repository }}">{{ project.git_repository }}</a>
-  <button class="ui teal button">Build</button>
-  <button class="ui teal basic button">Restart</button>
-  <button class="ui teal basic button">Edit</button>
-  <button class="ui red basic button">Shutdown</button>
 
-  <form action="{% url 'projects:project-delete' pk=project.pk %}" method="post">{% csrf_token %}
-    <button type="submit" class="ui red basic button">Delete</button>
-  </form>
+  <div class="ui grid">
+    <div class="four wide column">
 
-  <h2>Environment Variables</h2>
-  <button class="ui teal basic button">Add Variable</button>
-
-  <h2>Domains</h2>
-  <button class="ui teal basic button">Add domain</button>
-
-  <h2>Logs</h2>
-  <div class="ui feed">
-    {% for log in logs %}
-      <div class="event">
-        <div class="content">
-          <div class="date">
-            {{ log.logged_at }}
-          </div>
-          <p class="summary">
-            {{ log.text }}
-          </p>
-        </div>
+      <div class="ui vertical pointing menu">
+        <a class="active item">
+          Project
+        </a>
+        <a class="item">
+          Domains
+        </a>
+        <a class="item">
+          Environment Variables
+        </a>
+        <a class="item">
+          Scheduled Tasks
+        </a>
+        <a class="item">
+          Logs
+        </a>
       </div>
-    {% endfor %}
+    </div>
+    <div class="eight wide column">
+      <a href="{{ project.git_repository }}">{{ project.git_repository }}</a>
+      <button class="ui teal button">Build</button>
+      <button class="ui teal basic button">Restart</button>
+      <button class="ui teal basic button">Edit</button>
+      <button class="ui red basic button">Shutdown</button>
+
+      <form action="{% url 'projects:project-delete' pk=project.pk %}" method="post">{% csrf_token %}
+        <button type="submit" class="ui red basic button">Delete</button>
+      </form>
+
+      <h2>Environment Variables</h2>
+      <button class="ui teal basic button">Add Variable</button>
+
+      <h2>Domains</h2>
+      <button class="ui teal basic button">Add domain</button>
+
+      <h2>Scheduled Tasks</h2>
+
+      <h2>Logs</h2>
+      <div class="ui feed">
+        {% for log in logs %}
+          <div class="event">
+            <div class="content">
+              <div class="date">
+                {{ log.logged_at }}
+              </div>
+              <p class="summary">
+                {{ log.text }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
+{% endblock %}
+
+{% block js %}
+
 {% endblock %}

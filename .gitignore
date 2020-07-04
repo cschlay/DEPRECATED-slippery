@@ -1,3 +1,8 @@
 venv/
 *.sqlite3
 .env
+
+slippery.service
+*.sock
+
+nginx/

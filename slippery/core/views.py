@@ -23,7 +23,7 @@ class HomeView(TemplateView):
             }
 
     def get(self, request, *args, **kwargs):
-        if User.objects.all().count() > 1:
+        if User.objects.all().count() >= 1:
             if not request.user.is_authenticated:
                 return redirect('login')
         return render(request, self.template_name, context=self.get_context_data())

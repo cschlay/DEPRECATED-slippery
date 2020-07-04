@@ -45,4 +45,7 @@ cp scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 certbot --nginx
 
 python3 manage.py migrate
+chown $SUDO_USER:$SUDO_USER db.slite3
 python3 manage.py createsuperuser
+
+systemctl restart slippery

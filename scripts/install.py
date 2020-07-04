@@ -52,8 +52,9 @@ def create_systemd_service():
 
 
 def main():
-    server_name = input('Server domain or IP: ')
     create_systemd_service()
+    create_sudoers_config()
+    server_name = input('Server domain or IP: ')
     create_nginx_config(server_name)
     create_dotenv_file(server_name)
 

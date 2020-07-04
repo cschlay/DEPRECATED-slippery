@@ -10,7 +10,8 @@ echo "Installing dependencies..."
 # Server
 apt install nginx -y
 # Lets encrypt
-apt install software-properties-common
+apt install software-properties-common -y
+apt install certbot python3-certbot-nginx -y
 add-apt-repository universe
 apt update
 
@@ -42,7 +43,6 @@ systemctl restart nginx
 
 cp scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 
-apt install certbot python3-certbot-nginx
 certbot --nginx
 
 python3 manage.py migrate

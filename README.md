@@ -8,5 +8,6 @@
 sudo apt update && sudo apt upgrade
 cd
 git clone https://github.com/cschlay/slippery.git
-sudo ./slippery/scripts/install.sh
+cd slippery
+sudo ./scripts/install.sh
 ```

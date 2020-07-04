@@ -16,6 +16,7 @@ apt update
 
 # Slippery app itself
 apt install python3-pip -y
+apt install python3-dev -y
 apt install python3-venv -y
 
 mkdir scripts/files

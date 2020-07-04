@@ -8,3 +8,6 @@ slippery.service
 scripts/files
 logs/
 !.keep
+
+__pycache__
+*.pyc

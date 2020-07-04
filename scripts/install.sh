@@ -18,7 +18,8 @@ apt update
 apt install python3-pip -y
 apt install python3-venv -y
 
-mkdir $HOME/slippery/scripts/files
+cd
+mkdir slippery/scripts/files
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
@@ -29,17 +30,17 @@ echo "Creating configuration files..."
 python3 scripts/install.py
 
 echo "Preparing gunicorn..."
-cp $HOME/slippery/scripts/slippery.service /etc/systemd/system/slippery.service
+cp slippery/scripts/slippery.service /etc/systemd/system/slippery.service
 systemctl daemon-reload
 systemctl start slippery
 systemctl enable slippery
 systemctl status slippery
 
-cp $HOME/slippery/scripts/files/nginx-site-slippery /etc/nginx/sites-available/slippery
+cp slippery/scripts/files/nginx-site-slippery /etc/nginx/sites-available/slippery
 ln -s /etc/nginx/sites-available/slippery /etc/nginx/sites-enabled
 systemctl restart nginx
 
-cp $HOME/slippery/scripts/files/sudoers-slippery /etc/sudoers.d/slippery
+cp slippery/scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 
 apt install certbot python3-certbot-nginx
 certbot --nginx

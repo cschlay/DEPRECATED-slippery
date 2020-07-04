@@ -17,6 +17,4 @@ class RegistrationForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        if cleaned_data['install_key'] == settings.INSTALL_KEY:
-            return cleaned_data
         raise forms.ValidationError('Invalid install key.')

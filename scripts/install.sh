@@ -44,3 +44,5 @@ cp scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 
 apt install certbot python3-certbot-nginx
 certbot --nginx
+
+python3 manage.py createsuperuser

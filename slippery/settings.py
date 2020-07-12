@@ -153,3 +153,8 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+APP_DB_HOST = os.getenv('SL_APP_DB_HOST', 'localhost')
+APP_DB_PORT = os.getenv('SL_APP_DB_PORT', 5432)
+APP_DB_USER = os.getenv('SL_APP_DB_USER')
+APP_DB_PASSWORD = os.getenv('SL_APP_DB_PASSWORD')

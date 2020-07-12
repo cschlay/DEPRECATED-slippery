@@ -31,7 +31,7 @@
         <div class="card">
           <div class="content">
             <a class="header" href="{% url 'projects:project-detail' pk=project.pk %}">{{ project.title }}</a>
-           <div class="meta">Status: Deploying</div>
+            <div class="meta">Status: Deploying</div>
           </div>
           <div class="content">
             <a href="https://{{ project.domain }}" target="_blank">{{ project.domain }}</a>
@@ -41,6 +41,26 @@
     </div>
 
     <h2>Databases</h2>
+    <a href="{% url 'databases:create-db' %}">
+      <button class="ui primary button">New Database</button>
+    </a>
+
+    <div class="ui cards">
+      {% for database in databases %}
+        <div class="card">
+          <div class="content">
+            <a class="header" href="">{{ database.name }}</a>
+          </div>
+          <div class="content">
+            <ul class="ui list">
+              {% for project in database.project.all %}
+                <li>{{ project.title }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
     <p>The installation is incomplete. Please create a user in the server.</p>
   {% endif %}

@@ -19,6 +19,9 @@ class Project(models.Model):
     domain = models.CharField(max_length=100)
     status = models.IntegerField(choices=STATUS_CHOICES, default=STATUS_UNKNOWN)
 
+    def __str__(self):
+        return self.title
+
 
 class ProjectLog(models.Model):
     LEVEL_INFO = 'info'

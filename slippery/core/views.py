@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
 
+from slippery.contrib.databases.databases.dbmanager import ProjectDatabaseManager
+from slippery.contrib.databases.models import Database
 from slippery.projects.models import Project
 
 
@@ -14,7 +16,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         if self.request.user.is_authenticated:
             return {
-                'projects': Project.objects.all()
+                'projects': Project.objects.all(),
+                'databases': Database.objects.all()
             }
         else:
             return {}

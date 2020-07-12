@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2 import sql
 
 from slippery import settings
 
@@ -11,7 +12,6 @@ class ProjectDatabaseManager:
     def list_databases(self):
         """Returns a list of database names."""
         connection = self._connect()
-
         cursor = connection.cursor()
         cursor.execute("""
             SELECT datname FROM pg_database 
@@ -19,7 +19,29 @@ class ProjectDatabaseManager:
         """)
         result = cursor.fetchall()
         connection.close()
-        return list(map(lambda row: row[0], result))
+        return list(map(lambda row: {'name': row[0]}, result))
+
+    def create_database(self, name):
+        connection = self._connect()
+        connection.autocommit = True
+        cursor = connection.cursor()
+        cursor.execute(sql.SQL("CREATE DATABASE {}").format(
+            sql.Identifier(name))
+        )
+        connection.close()
+        return True
+
+    def delete_database(self, name):
+        if name != 'postgres':
+            connection = self._connect()
+            connection.autocommit = True
+            cursor = connection.cursor()
+            cursor.execute(sql.SQL("DROP DATABASE {}").format(
+                sql.Identifier(name))
+            )
+            connection.close()
+            return True
+        return False
 
     @staticmethod
     def _connect():

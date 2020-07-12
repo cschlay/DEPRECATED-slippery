@@ -4,6 +4,7 @@ RUN apt update -y && apt upgrade -y
 RUN apt install gcc -y
 RUN apt install python3-pip -y
 RUN apt install python3-dev -y
+RUN apt install libpq-dev -y
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt /code/

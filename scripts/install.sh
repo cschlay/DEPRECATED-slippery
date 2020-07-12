@@ -15,11 +15,16 @@ apt install certbot python3-certbot-nginx -y
 add-apt-repository universe
 apt update
 
-# Slippery app itself
+# Python Dependencies
 apt install python3-pip -y
 apt install python3-dev -y
 apt install python3-venv -y
 
+# Postgres Dependencies
+apt install gcc -y
+apt install libpq-dev -y
+
+# Slippery app itself
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt

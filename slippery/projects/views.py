@@ -25,6 +25,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     def deploy_project(self, instance):
         os.system(f'git clone {instance.git_repository} ~/projects')
+        ProjectLog.objects.create(
+            project=instance,
+            level=ProjectLog.LEVEL_INFO,
+            text='Project repository cloned.'
+        )
 
 
 class ProjectDetailView(DetailView):

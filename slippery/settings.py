@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'slippery.core',
+    'slippery.contrib.databases',
     'slippery.contrib.gitlab',
     'slippery.projects',
     'axes',

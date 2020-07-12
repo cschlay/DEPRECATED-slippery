@@ -36,7 +36,7 @@ class ProjectDatabaseManager:
             connection = self._connect()
             connection.autocommit = True
             cursor = connection.cursor()
-            cursor.execute(sql.SQL("DROP DATABASE {}").format(
+            cursor.execute(sql.SQL("DROP DATABASE IF EXISTS {}").format(
                 sql.Identifier(name))
             )
             connection.close()

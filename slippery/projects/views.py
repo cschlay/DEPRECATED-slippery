@@ -7,7 +7,7 @@ from django.views.generic import CreateView, DetailView, DeleteView
 from slippery.projects.models import Project, ProjectLog
 
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(CreateView, LoginRequiredMixin):
     template_name = 'projects/new-project.html'
     model = Project
     fields = '__all__'
@@ -32,7 +32,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         )
 
 
-class ProjectDetailView(DetailView):
+class ProjectDetailView(DetailView, LoginRequiredMixin):
     template_name = 'projects/project-detail.html'
     model = Project
 
@@ -45,7 +45,7 @@ class ProjectDetailView(DetailView):
         return Project.objects.all()
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(DeleteView, LoginRequiredMixin):
     template_name = 'projects/project-detail.html'
     model = Project
     success_url = reverse_lazy('home')

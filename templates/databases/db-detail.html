@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Database: {{ object.name }}</h1>
+  <button class="ui button">Edit</button>
+  <button class="ui button">Backups</button>
+  <form action="{% url 'databases:db-delete' pk=object.pk %}" method="post">{% csrf_token %}
+    <button class="ui red basic button">Delete</button>
+  </form>
+
+  <h2>Credentials</h2>
+  <table class="key-value-table">
+    <tbody>
+    <tr>
+      <td class="key">User</td>
+      <td class="value">{{ object.username }}</td>
+    </tr>
+    <tr>
+      <td class="key">Password</td>
+      <td class="value">{{ object.password }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Backups</h2>
+  <button class="ui primary button">Take Snapshot</button>
+  <table class="ui table">
+    <thead>
+    <tr>
+      <th>Time</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>2020-07-12</td>
+      <td>Manual A</td>
+      <td>
+        <button class="ui teal button">Restore</button>
+        <button class="ui basic red button">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block css %}
+  <style>
+    .key-value-table {
+      border-collapse: collapse;
+      font-size: 1.25rem;
+      width: 100%;
+    }
+
+    .key-value-table > tbody > tr > td {
+      border-bottom: 1px solid black;
+      padding: 0.5rem 0;
+    }
+
+    .key {
+      width: 25%;
+    }
+
+    .value {
+      font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+    }
+  </style>
+{% endblock %}

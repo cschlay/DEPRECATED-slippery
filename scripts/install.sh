@@ -20,9 +20,26 @@ apt install python3-pip -y
 apt install python3-dev -y
 apt install python3-venv -y
 
-# Postgres Dependencies
+# Postgres
 apt install gcc -y
 apt install libpq-dev -y
+apt install postgresql
+
+# Docker
+# https://docs.docker.com/engine/install/ubuntu/
+apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+apt update
+apt install docker-ce docker-ce-cli containerd.io
+
+# Docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 # Slippery app itself
 python3 -m venv venv
@@ -39,7 +56,6 @@ cp scripts/slippery.service /etc/systemd/system/slippery.service
 systemctl daemon-reload
 systemctl start slippery
 systemctl enable slippery
-systemctl status slippery
 
 cp scripts/files/nginx-site-slippery /etc/nginx/sites-available/slippery
 ln -s /etc/nginx/sites-available/slippery /etc/nginx/sites-enabled

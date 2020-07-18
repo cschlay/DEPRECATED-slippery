@@ -18,19 +18,16 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SL_SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('SL_DEBUG') == 'True'
+DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = [
-    os.getenv('SL_HOSTNAME')
-]
+ALLOWED_HOSTS = [os.getenv('HOSTNAME')]
 
 if DEBUG:
     ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
@@ -65,8 +62,7 @@ ROOT_URLCONF = 'slippery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'slippery.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -116,16 +111,20 @@ LOGGING = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -154,7 +153,11 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-APP_DB_HOST = os.getenv('SL_APP_DB_HOST', 'localhost')
-APP_DB_PORT = os.getenv('SL_APP_DB_PORT', 5432)
-APP_DB_USER = os.getenv('SL_APP_DB_USER')
-APP_DB_PASSWORD = os.getenv('SL_APP_DB_PASSWORD')
+APP_DB_HOST = os.getenv('APP_DB_HOST', 'localhost')
+APP_DB_PORT = os.getenv('APP_DB_PORT', 5432)
+APP_DB_USER = os.getenv('APP_DB_USER')
+APP_DB_PASSWORD = os.getenv('APP_DB_PASSWORD')
+
+PROJECTS_DIRECTORY = os.path.join(BASE_DIR,
+                                  'projectsdir') if DEBUG else os.getenv(
+                                      PROJECTS_DIRECTORY, '~/projects')

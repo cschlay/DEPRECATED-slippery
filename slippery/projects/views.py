@@ -5,6 +5,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, DeleteView
 
 from slippery.projects.models import Project, ProjectLog
+from slippery import settings
+
+from slippery.projects.essentials import deploys
 
 
 class ProjectCreateView(CreateView, LoginRequiredMixin):
@@ -15,21 +18,23 @@ class ProjectCreateView(CreateView, LoginRequiredMixin):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        ProjectLog.objects.create(
-            project=self.object,
-            level=ProjectLog.LEVEL_INFO,
-            text='Project created.'
-        )
-        self.deploy_project(self.object)
+        ProjectLog.objects.create(project=self.object,
+                                  level=ProjectLog.LEVEL_INFO,
+                                  text='Project created.')
+        self.clone_project(self.object)
+        deploys.ProjectDeployer(project=self.object).deploy()
         return response
 
-    def deploy_project(self, instance):
-        os.system(f'git clone {instance.git_repository} ~/projects')
-        ProjectLog.objects.create(
-            project=instance,
-            level=ProjectLog.LEVEL_INFO,
-            text='Project repository cloned.'
-        )
+    def clone_project(self, instance):
+        # https://stackoverflow.com/questions/2411031/how-do-i-clone-into-a-non-empty-directory
+        os.chdir(f'{settings.PROJECTS_DIRECTORY}/{self.object.title}')
+        os.system('git init')
+        os.system(f'git remote add origin {instance.git_repository}')
+        os.system('git fetch')
+        os.system('git checkout -t origin/master')
+        ProjectLog.objects.create(project=instance,
+                                  level=ProjectLog.LEVEL_INFO,
+                                  text='Project repository cloned.')
 
 
 class ProjectDetailView(DetailView, LoginRequiredMixin):

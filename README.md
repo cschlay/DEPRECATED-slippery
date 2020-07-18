@@ -35,3 +35,16 @@ cd slippery
 source venv/bin/activate
 python3 manage.py axes_reset
 ```
+
+
+## .env -file
+
+```
+SECRET_KEY=developmentsecret
+HOSTNAME=
+DEBUG=True
+APP_DB_HOST=localhost
+APP_DB_PORT=5432
+APP_DB_USER=postgres
+APP_DB_PASSWORD=postgres
+```

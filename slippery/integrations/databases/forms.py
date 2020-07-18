@@ -1,6 +1,6 @@
 from django import forms
 
-from slippery.contrib.databases.models import Database
+from slippery.integrations.databases.models import Database
 
 
 class DatabaseForm(forms.ModelForm):

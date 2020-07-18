@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from slippery.contrib.databases.databases.dbmanager import ProjectDatabaseManager
+from slippery.integrations.databases.databases.dbmanager import ProjectDatabaseManager
 
 
 class ProjectDatabaseManagerTestCase(TestCase):

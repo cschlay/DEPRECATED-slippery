@@ -1,6 +1,6 @@
 from django.urls import path
 
-from slippery.contrib.databases import views
+from slippery.integrations.databases import views
 
 app_name = 'databases'
 urlpatterns = [

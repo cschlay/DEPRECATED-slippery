@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
 
-from slippery.contrib.databases.databases.dbmanager import ProjectDatabaseManager
-from slippery.contrib.databases.models import Database
+from slippery.integrations.databases.databases.dbmanager import ProjectDatabaseManager
+from slippery.integrations.databases.models import Database
 from slippery.projects.models import Project
 
 

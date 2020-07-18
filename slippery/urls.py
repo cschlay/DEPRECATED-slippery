@@ -9,10 +9,10 @@ def logout_view(request):
 
 
 urlpatterns = [
-    path('gitlab/', include('slippery.contrib.gitlab.urls')),
+    path('gitlab/', include('slippery.integrations.gitlab.urls')),
     path('logout/', logout_view, name="logout"),
-    path('', include('slippery.contrib.databases.urls')),
+    path('', include('slippery.integrations.databases.urls')),
     path('', include('slippery.core.urls')),
     path('', include('slippery.projects.urls')),
-    path('', include('django.contrib.auth.urls')),
+    path('', include('django.integrations.auth.urls')),
 ]

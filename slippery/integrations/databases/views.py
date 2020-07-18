@@ -4,9 +4,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, CreateView, DetailView, DeleteView
 
-from slippery.contrib.databases.databases.dbmanager import ProjectDatabaseManager
-from slippery.contrib.databases.forms import DatabaseForm
-from slippery.contrib.databases.models import Database
+from slippery.integrations.databases.databases.dbmanager import ProjectDatabaseManager
+from slippery.integrations.databases.forms import DatabaseForm
+from slippery.integrations.databases.models import Database
 
 
 class DatabaseCreateView(CreateView, LoginRequiredMixin):

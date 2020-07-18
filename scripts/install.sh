@@ -47,10 +47,9 @@ systemctl restart nginx
 
 cp scripts/files/sudoers-slippery /etc/sudoers.d/slippery
 
-certbot --nginx
-
 python3 manage.py migrate
-chown $SUDO_USER:$SUDO_USER db.slite3
+chown $SUDO_USER:$SUDO_USER db.sqlite3
 python3 manage.py createsuperuser
 
+certbot --nginx
 systemctl restart slippery
